@@ -168,13 +168,23 @@ export default function Page() {
       </section>
 
       <section className="hand player-hand">
-        {playerHand.map((card) => (
-          <CardImage
-            key={card.id}
-            cardId={card.id}
-            onClick={() => handlePlayerCardClick(card)}
-          />
-        ))}
+        {playerHand.map((card) => {
+          const cardMeta = getCardMeta(card.id);
+          const topMeta = discardPile ? getCardMeta(discardPile.id) : null;
+
+          const playable =
+            !discardPile ||
+            (cardMeta && topMeta && canPlayCard(cardMeta, topMeta));
+
+          return (
+            <CardImage
+              key={card.id}
+              cardId={card.id}
+              playable={playable}
+              onClick={() => playable && handlePlayerCardClick(card)}
+            />
+          );
+        })}
       </section>
 
       <div className="end-turn-area">

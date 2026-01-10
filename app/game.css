@@ -57,13 +57,27 @@
 .card-image {
   width: 200px;
   height: 286px;
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+}
 
-  border-radius: 10px; /* ⬅️ yumuşak köşeler */
-  overflow: hidden; /* ⬅️ köşeden taşma olmasın */
+/* 🟢 SADECE OYNANABİLİR KART */
+.card-image.playable {
+  cursor: pointer;
+}
 
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35); /* ⬅️ kart derinliği */
+.card-image.playable:hover {
+  transform: translateY(-16px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+}
 
-  transition: transform 0.2s ease, box-shadow 0.2s ease, z-index 0.2s;
+/* 🔴 OYNANAMAZ */
+.card-image.disabled {
+  cursor: default;
+  opacity: 0.55;
+  pointer-events: none; /* ⬅️ KRİTİK */
 }
 
 /* =========================

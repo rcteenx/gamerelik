@@ -2,18 +2,16 @@ import Image from "next/image";
 
 type Props = {
   cardId: number;
+  playable?: boolean;
   onClick?: () => void;
 };
 
-export default function CardImage({ cardId, onClick }: Props) {
+export default function CardImage({ cardId, playable = true, onClick }: Props) {
   return (
-    <Image
+    <img
       src={`/cards/${cardId}.png`}
-      alt={`Card ${cardId}`}
-      width={200}
-      height={286}
-      className="card-image"
-      onClick={onClick}
+      className={`card-image ${playable ? "playable" : "disabled"}`}
+      onClick={playable ? onClick : undefined}
       draggable={false}
     />
   );
