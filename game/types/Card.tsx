@@ -6,11 +6,15 @@ export type CardColor =
   | "green"
   | "wild";
 
-export type CardType = "number" | "wild" | "reverse" | "draw2" | "wild";
+export type CardType = "number" | "wild" | "reverse" | "draw2";
 
 export type CardMeta = {
   id: number;
   number: number;
   color: CardColor;
   type: CardType;
+};
+
+export type Card = {
+  id: number;
 };

@@ -1,4 +1,4 @@
-import { Card } from "../types/Card";
+import { Card } from "@/game/types/Card";
 import { shuffleDeck } from "./shuffle";
 
 interface DealResult {

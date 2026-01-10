@@ -1,6 +1,4 @@
-export type Card = {
-  id: number;
-};
+import { Card } from "../types/Card";
 
 /* 1 – 80 arası kartlar */
 export function createShuffledDeck(): Card[] {

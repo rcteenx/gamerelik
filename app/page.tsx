@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import CardImage from "@/game/components/CardImage";
-import { createShuffledDeck, dealHands, Card } from "@/game/utils/deck";
+import { Card } from "@/game/types/Card";
+import { createShuffledDeck, dealHands } from "@/game/utils/deck";
 import { getCardMeta } from "@/game/data/cards";
 import { canPlayCard } from "@/game/utils/rules";
 import "@/app/game.css";
