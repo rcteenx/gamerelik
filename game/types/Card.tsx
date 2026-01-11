@@ -10,6 +10,7 @@ export type CardType = "number" | "wild" | "reverse" | "draw2";
 
 export type CardMeta = {
   id: number;
+  name: string;
   number: number;
   color: CardColor;
   type: CardType;

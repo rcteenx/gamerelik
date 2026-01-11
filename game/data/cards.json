@@ -1,480 +1,560 @@
 [
   {
     "id": 1,
+    "name": "Demeter",
     "number": 1,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 2,
+    "name": "Hestia",
     "number": 2,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 3,
+    "name": "Apollon",
     "number": 3,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 4,
+    "name": "Hades",
     "number": 4,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 5,
+    "name": "Afrodit",
     "number": 5,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 6,
+    "name": "Hephaistos",
     "number": 6,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 7,
+    "name": "Artemis",
     "number": 7,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 8,
+    "name": "Hera",
     "number": 8,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 9,
+    "name": "Ares",
     "number": 9,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 10,
+    "name": "Dionysos",
     "number": 10,
     "color": "orange",
     "type": "number"
   },
   {
     "id": 11,
+    "name": "Zeus",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 12,
+    "name": "Athena",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 13,
+    "name": "Poseidon",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 14,
+    "name": "Hermes",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 15,
+    "name": "Nemesis",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 16,
+    "name": "Renenutet",
     "number": 1,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 17,
+    "name": "Bes",
     "number": 2,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 18,
+    "name": "Sekhmet",
     "number": 3,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 19,
+    "name": "Osiris",
     "number": 4,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 20,
+    "name": "Hathor",
     "number": 5,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 21,
+    "name": "Ptah",
     "number": 6,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 22,
+    "name": "Neith",
     "number": 7,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 23,
+    "name": "Isis",
     "number": 8,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 24,
+    "name": "Horus",
     "number": 9,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 25,
+    "name": "Bastet",
     "number": 10,
     "color": "yellow",
     "type": "number"
   },
   {
     "id": 26,
+    "name": "Ra",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 27,
+    "name": "Thoth",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 28,
+    "name": "Hapi",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 29,
+    "name": "Set",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 30,
+    "name": "Petbe",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 31,
+    "name": "Freyr",
     "number": 1,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 32,
+    "name": "Husvarttir",
     "number": 2,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 33,
+    "name": "Eir",
     "number": 3,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 34,
+    "name": "Hel",
     "number": 4,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 35,
+    "name": "Freya",
     "number": 5,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 36,
+    "name": "Brokk&sindri",
     "number": 6,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 37,
+    "name": "Ullr",
     "number": 7,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 38,
+    "name": "Frigg",
     "number": 8,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 39,
+    "name": "Tyr",
     "number": 9,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 40,
+    "name": "Bragi",
     "number": 10,
     "color": "blue",
     "type": "number"
   },
   {
     "id": 41,
+    "name": "Odin",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 42,
+    "name": "Mimir",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 43,
+    "name": "Njord",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 44,
+    "name": "Loki",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 45,
+    "name": "Vidar",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 46,
+    "name": "Ceres",
     "number": 1,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 47,
+    "name": "Vesta",
     "number": 2,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 48,
+    "name": "Apollo",
     "number": 3,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 49,
+    "name": "Pluton",
     "number": 4,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 50,
+    "name": "Venüs",
     "number": 5,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 51,
+    "name": "Vulkan",
     "number": 6,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 52,
+    "name": "Diana",
     "number": 7,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 53,
+    "name": "Juno",
     "number": 8,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 54,
+    "name": "Mars",
     "number": 9,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 55,
+    "name": "Baküs",
     "number": 10,
     "color": "grey",
     "type": "number"
   },
   {
     "id": 56,
+    "name": "Jüpiter",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 57,
+    "name": "Minerva",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 58,
+    "name": "Neptün",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 59,
+    "name": "Merkür",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 60,
+    "name": "Ultio",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 61,
+    "name": "Shennong",
     "number": 1,
     "color": "green",
     "type": "number"
   },
   {
     "id": 62,
+    "name": "Zao Shen",
     "number": 2,
     "color": "green",
     "type": "number"
   },
   {
     "id": 63,
+    "name": "Wu Tao",
     "number": 3,
     "color": "green",
     "type": "number"
   },
   {
     "id": 64,
+    "name": "Yan Wang",
     "number": 4,
     "color": "green",
     "type": "number"
   },
   {
     "id": 65,
+    "name": "Yang Asha",
     "number": 5,
     "color": "green",
     "type": "number"
   },
   {
     "id": 66,
+    "name": "Lu Ban",
     "number": 6,
     "color": "green",
     "type": "number"
   },
   {
     "id": 67,
+    "name": "Hou Yi",
     "number": 7,
     "color": "green",
     "type": "number"
   },
   {
     "id": 68,
+    "name": "Nu Wa",
     "number": 8,
     "color": "green",
     "type": "number"
   },
   {
     "id": 69,
+    "name": "Guan Yu",
     "number": 9,
     "color": "green",
     "type": "number"
   },
   {
     "id": 70,
+    "name": "Han Xiangzi",
     "number": 10,
     "color": "green",
     "type": "number"
   },
   {
     "id": 71,
+    "name": "Yeşim İmparator",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 72,
+    "name": "Xuannü",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 73,
+    "name": "Long Wang",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 74,
+    "name": "Sun Wukong",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 75,
+    "name": "Lei Gong",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 76,
+    "name": "Hekate",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 77,
+    "name": "Anubis",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 78,
+    "name": "Thor",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 79,
+    "name": "Janus",
     "number": -1,
     "color": "wild",
     "type": "wild"
   },
   {
     "id": 80,
+    "name": "Erlang Shen",
     "number": -1,
     "color": "wild",
     "type": "wild"

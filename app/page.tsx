@@ -1,24 +1,28 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect } from "react";
 import CardImage from "@/game/components/CardImage";
 import { Card } from "@/game/types/Card";
 import { createShuffledDeck, dealHands } from "@/game/utils/deck";
 import { getCardMeta } from "@/game/data/cards";
 import { canPlayCard } from "@/game/utils/rules";
+
 import "@/app/game.css";
 
-type Turn = "player" | "npc";
+type Turn = "player1" | "player2";
 
 export default function Page() {
-  const [playerHand, setPlayerHand] = useState<Card[]>([]);
-  const [npcHand, setNpcHand] = useState<Card[]>([]);
+  const [player1Hand, setPlayer1Hand] = useState<Card[]>([]);
+  const [player2Hand, setPlayer2Hand] = useState<Card[]>([]);
   const [drawPile, setDrawPile] = useState<Card[]>([]);
   const [discardPile, setDiscardPile] = useState<Card | null>(null);
-  const [turn, setTurn] = useState<Turn>("player");
+  const [lastPlayedWild, setLastPlayedWild] = useState<Card | null>(null);
+  const [turn, setTurn] = useState<Turn>("player1");
+  const [log, setLog] = useState<string[]>([]);
 
-  // 🔒 NPC bir turda sadece 1 kez çalışsın
-  const npcProcessingRef = useRef(false);
+  // Her turn için oynama/çekme kontrolü
+  const [playedThisTurn, setPlayedThisTurn] = useState(false);
+  const [drewThisTurn, setDrewThisTurn] = useState(false);
 
   /* =========================
      INIT
@@ -26,176 +30,156 @@ export default function Page() {
   useEffect(() => {
     const deck = createShuffledDeck();
     const { player, npc, remainingDeck } = dealHands(deck);
-
-    setPlayerHand(player);
-    setNpcHand(npc);
+    setPlayer1Hand(player);
+    setPlayer2Hand(npc);
     setDrawPile(remainingDeck);
   }, []);
 
   /* =========================
-     NPC TURN EFFECT (CRITICAL)
+     HELPER
      ========================= */
-  useEffect(() => {
-    if (turn !== "npc") return;
-    if (npcProcessingRef.current) return;
-
-    npcProcessingRef.current = true;
-
-    const timer = setTimeout(() => {
-      playNpcTurn();
-      npcProcessingRef.current = false;
-    }, 600);
-
-    return () => clearTimeout(timer);
-  }, [turn, npcHand, drawPile, discardPile]);
-
-  /* =========================
-     PLAYER PLAY
-     ========================= */
-  const handlePlayerCardClick = (card: Card) => {
-    if (turn !== "player") return;
-
-    if (!discardPile) {
-      setDiscardPile(card);
-      setPlayerHand((prev) => prev.filter((c) => c.id !== card.id));
-      return;
-    }
-
-    const selected = getCardMeta(card.id);
-    const top = getCardMeta(discardPile.id);
-    if (!selected || !top) return;
-
-    if (!canPlayCard(selected, top)) return;
-
-    setDiscardPile(card);
-    setPlayerHand((prev) => prev.filter((c) => c.id !== card.id));
-  };
-
-  /* =========================
-     PLAYER DRAW
-     ========================= */
-  const handleDrawCard = () => {
-    if (turn !== "player") return;
-    if (drawPile.length === 0) return;
-
-    const drawn = drawPile[0];
-    setDrawPile((prev) => prev.slice(1));
-    setPlayerHand((prev) => [...prev, drawn]);
-  };
-
-  /* =========================
-     END TURN
-     ========================= */
-  const handleEndTurn = () => {
-    if (turn !== "player") return;
-    setTurn("npc");
-  };
-
-  /* =========================
-     NPC LOGIC (STATE SAFE)
-     ========================= */
-  const playNpcTurn = () => {
-    if (!discardPile) {
-      setTurn("player");
-      return;
-    }
+  const canPlay = (card: Card) => {
+    if (playedThisTurn) return false; // zaten kart oynadı
+    if (!discardPile) return true;
 
     const topMeta = getCardMeta(discardPile.id);
-    if (!topMeta) {
-      setTurn("player");
-      return;
+    const cardMeta = getCardMeta(card.id);
+    if (!topMeta || !cardMeta) return false;
+
+    // Wild kart oynandıysa alttaki kart ile kontrol et
+    if (lastPlayedWild) {
+      return canPlayCard(cardMeta, topMeta);
     }
 
-    let newNpcHand = [...npcHand];
-    let newDrawPile = [...drawPile];
+    return canPlayCard(cardMeta, topMeta);
+  };
 
-    // 1️⃣ Elden oyna
-    const index = newNpcHand.findIndex((card) => {
-      const meta = getCardMeta(card.id);
-      return meta && canPlayCard(meta, topMeta);
-    });
-
-    if (index !== -1) {
-      const played = newNpcHand.splice(index, 1)[0];
-      setNpcHand(newNpcHand);
-      setDiscardPile(played);
-      setTurn("player");
-      return;
+  const endTurnIfDone = () => {
+    if (playedThisTurn || drewThisTurn) {
+      setTurn((prev) => (prev === "player1" ? "player2" : "player1"));
+      setPlayedThisTurn(false);
+      setDrewThisTurn(false);
+      setLastPlayedWild(null);
     }
+  };
 
-    // 2️⃣ Çek
-    if (newDrawPile.length === 0) {
-      setTurn("player");
-      return;
-    }
+  const playCard = (card: Card, player: "player1" | "player2") => {
+    const cardMeta = getCardMeta(card.id);
+    if (!cardMeta) return;
+    if (!canPlay(card)) return;
 
-    const drawn = newDrawPile.shift()!;
-    const drawnMeta = getCardMeta(drawn.id);
-
-    if (drawnMeta && canPlayCard(drawnMeta, topMeta)) {
-      setDiscardPile(drawn);
+    if (cardMeta.type === "wild") {
+      setLastPlayedWild(card); // sadece overlay olarak göster
     } else {
-      setNpcHand([...newNpcHand, drawn]);
+      setDiscardPile(card);
+      setLastPlayedWild(null);
     }
 
-    setDrawPile(newDrawPile);
-    setTurn("player");
+    setPlayedThisTurn(true);
+
+    if (player === "player1") {
+      setPlayer1Hand((prev) => prev.filter((c) => c.id !== card.id));
+    } else {
+      setPlayer2Hand((prev) => prev.filter((c) => c.id !== card.id));
+    }
+
+    // log ekle
+    setLog((prev) => [
+      `Player ${player === "player1" ? "1" : "2"} -> ${cardMeta.name}`,
+      ...prev,
+    ]);
+
+    endTurnIfDone();
+  };
+
+  const drawCard = (player: "player1" | "player2") => {
+    if (drewThisTurn || drawPile.length === 0) return;
+
+    const [drawn, ...rest] = drawPile;
+    setDrawPile(rest);
+
+    if (player === "player1") setPlayer1Hand((prev) => [...prev, drawn]);
+    else setPlayer2Hand((prev) => [...prev, drawn]);
+
+    setDrewThisTurn(true);
+
+    endTurnIfDone();
   };
 
   /* =========================
      RENDER
      ========================= */
+  const topCard = discardPile;
+
   return (
     <main className="table">
-      <section className="hand npc-hand">
-        {npcHand.map((card) => (
-          <CardImage key={card.id} cardId={card.id} />
-        ))}
+      {/* Player 2 hand */}
+      <section
+        className={`hand player2-hand ${
+          turn === "player2" ? "active-hand" : ""
+        }`}
+      >
+        <h3 className="text-2xl font-bold">Player 2</h3>
+        <div className="flex gap-4 justify-center items-center">
+          {player2Hand.map((card) => (
+            <CardImage
+              key={card.id}
+              cardId={card.id}
+              playable={turn === "player2" && canPlay(card)}
+              onClick={() => turn === "player2" && playCard(card, "player2")}
+            />
+          ))}
+        </div>
       </section>
 
+      {/* Ortadaki draw & discard */}
       <section className="center-area">
-        <div className="draw-pile" onClick={handleDrawCard}>
+        <div className="log-area">
+          <h3 className="log-title">Game Log</h3>
+          <div className="log-entries">
+            {log.map((entry, i) => (
+              <div key={i} className="log-entry">
+                {entry}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="draw-pile" onClick={() => drawCard(turn)}>
           <CardImage cardId={0} />
         </div>
 
-        <div className="discard-pile">
-          {discardPile ? (
-            <CardImage cardId={discardPile.id} />
+        <div className="discard-pile" style={{ position: "relative" }}>
+          {topCard ? (
+            <>
+              <CardImage cardId={topCard.id} />
+              {lastPlayedWild && <CardImage cardId={lastPlayedWild.id} />}
+            </>
           ) : (
             <div className="discard-placeholder">Atılan Kart</div>
           )}
         </div>
       </section>
 
-      <section className="hand player-hand">
-        {playerHand.map((card) => {
-          const cardMeta = getCardMeta(card.id);
-          const topMeta = discardPile ? getCardMeta(discardPile.id) : null;
-
-          const playable =
-            !discardPile ||
-            (cardMeta && topMeta && canPlayCard(cardMeta, topMeta));
-
-          return (
+      {/* Player 1 hand */}
+      <section
+        className={`hand player1-hand ${
+          turn === "player1" ? "active-hand" : ""
+        }`}
+      >
+        <h3 className="text-2xl font-bold">Player 1</h3>
+        <div className="flex gap-4 justify-center items-center">
+          {player1Hand.map((card) => (
             <CardImage
               key={card.id}
               cardId={card.id}
-              playable={playable}
-              onClick={() => playable && handlePlayerCardClick(card)}
+              playable={turn === "player1" && canPlay(card)}
+              onClick={() => turn === "player1" && playCard(card, "player1")}
             />
-          );
-        })}
+          ))}
+        </div>
       </section>
 
-      <div className="end-turn-area">
-        <button
-          className="end-turn-button"
-          onClick={handleEndTurn}
-          disabled={turn !== "player"}
-        >
-          End Turn
-        </button>
-      </div>
+      <h2>Current Turn: {turn === "player1" ? "Player 1" : "Player 2"}</h2>
     </main>
   );
 }

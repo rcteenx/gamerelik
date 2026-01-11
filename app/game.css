@@ -2,12 +2,12 @@
 
 .table {
   min-height: 100vh;
-  padding: 24px;
+  padding: 20px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
 
   background: radial-gradient(circle, #0b6623, #054d1c);
 }
@@ -24,7 +24,7 @@
 .center-area {
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 200px;
 }
 
 .deck-wrapper {
@@ -67,10 +67,17 @@
   cursor: pointer;
 }
 
-.card-image.playable:hover {
-  transform: translateY(-16px) scale(1.05);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-  z-index: 5;
+/* sadece player hand veya playable kartlar hover alır */
+.player1-hand .card-image.playable:hover,
+.player2-hand .card-image.playable:hover {
+  transform: translateY(-10px);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+/* discard pile hover yok */
+.discard-pile .card-image {
+  transform: none;
+  cursor: default;
 }
 
 /* 🔴 OYNANAMAZ */
@@ -97,10 +104,14 @@
   overflow-x: auto;
   overflow-y: visible; /* ⬅️ büyüyen kart kesilmez */
 
-  padding: 32px 16px 16px; /* ⬅️ üst boşluk hover için */
-
   scroll-behavior: smooth;
   scrollbar-width: thin;
+  padding: 20px;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column; /* Başlık üstte, kartlar altında */
+  justify-content: center; /* Yatay ortala */
+  align-items: center; /* Dikey ortala */
 }
 
 /* Kartlar küçülmesin */
@@ -131,6 +142,10 @@
 .hand::-webkit-scrollbar-track {
   background: transparent;
 }
+.active-hand {
+  background-color: rgba(255, 255, 255, 0.2); /* örnek mavi vurgusu */
+  border-radius: 8px;
+}
 
 .card-image {
   transition: transform 0.2s ease, z-index 0.2s;
@@ -138,9 +153,7 @@
 
 .hand .card-image:hover {
   transform: translateY(-24px) scale(1.04);
-
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
-
   z-index: 10;
 }
 
@@ -148,18 +161,50 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 60px;
-  margin: 32px 0;
+  gap: 40px;
+  margin: 12px 0;
+}
+.log-area {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 287px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.log-title {
+  padding: 12px 8px 4px 8px;
+  background-color: #333;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #444;
+  flex-shrink: 0;
+}
+
+.log-entries {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column-reverse; /* alttan yukarı akmasını sağlar */
+  overflow-y: auto;
+  padding: 6px 10px;
+}
+
+.log-entry {
+  margin-bottom: 4px;
 }
 
 .draw-pile,
 .discard-pile {
+  margin: 20px;
   width: 200px;
   height: 286px;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .discard-placeholder {
